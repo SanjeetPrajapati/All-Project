@@ -1,5 +1,4 @@
 ### all projects
 
-### https://github.com/SanjeetPrajapati/All-Project
-
+### https://sanjeetprajapati.github.io/All-Project/
 refer above link for this page

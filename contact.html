@@ -15,5 +15,101 @@
             <li><a href="contact.html">About Me</a></li>
         </ul>
     </div>
+    <br>
+    <br>
+
+     <div class="projects">
+        <p> Total project : 15 </p>
+        <!-- <br> -->
+        <br>
+        import java.util.*;
+
+// ==========================================
+// 1. THE DATA BOX (Simple Structure)
+// ==========================================
+class Orders {
+    int orderId;
+    String orderName;
+    List<String> products;
+    List<Integer> quantities;
+
+    // Plain constructor to copy variables
+    public Orders(int orderId, String orderName, int noOfProducts, List<String> products, List<Integer> quantities) {
+        this.orderId = orderId;
+        this.orderName = orderName;
+        this.products = products;
+        this.quantities = quantities;
+    }
+
+    // Direct Getters
+    public int getOrderId() { return orderId; }
+    public String getOrderName() { return orderName; }
+    public List<String> getProducts() { return products; }
+    public List<Integer> getQuantities() { return quantities; }
+}
+
+// ==========================================
+// 2. THE CUSTOM EXCEPTION (Mandatory 3 Lines)
+// ==========================================
+class ProductNotFoundException extends Exception {
+    public ProductNotFoundException(String message) {
+        super(message);
+    }
+}
+
+// ==========================================
+// 3. THE SERVICE ENGINE (Easiest Logic)
+// ==========================================
+class OrdersService {
+
+    // TASK 1: Find product name with largest quantity
+    public String maxQuantity(int id, List<Orders> orders) {
+        // Step 1: Loop to find the matching order ID
+        for (Orders o : orders) {
+            if (o.getOrderId() == id) {
+                
+                int maxVal = 0;
+                int maxIndex = 0;
+
+                // Step 2: Loop through quantities to find the highest position
+                for (int i = 0; i < o.getQuantities().size(); i++) {
+                    if (o.getQuantities().get(i) > maxVal) {
+                        maxVal = o.getQuantities().get(i);
+                        maxIndex = i; // Save the position index
+                    }
+                }
+                // Step 3: Return the product name at that exact same position
+                return o.getProducts().get(maxIndex);
+            }
+        }
+        return null; // Returns null if Order ID doesn't exist
+    }
+
+    // TASK 2: Find all orders containing a specific fruit name
+    public List<Orders> findOrderByProductString(String pName, List<Orders> orders) throws ProductNotFoundException {
+        List<Orders> result = new ArrayList<>();
+
+        // Step 1: Look through all orders
+        for (Orders o : orders) {
+            // Step 2: Look through all products inside that order
+            for (String p : o.getProducts()) {
+                if (p.equalsIgnoreCase(pName)) {
+                    result.add(o); // Match found! Add entire order to our list
+                    break;         // Stop checking this order, move to the next one
+                }
+            }
+        }
+
+        // Step 3: If our result list is empty, throw the error
+        if (result.isEmpty()) {
+            throw new ProductNotFoundException("Product Not Found");
+        }
+
+        return result;
+    }
+}
+        <br>
+        <br>
+        </div>
 </body>
 </html>
